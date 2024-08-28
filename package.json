@@ -12,10 +12,11 @@
     "apexcharts": "^3.45.2",
     "flatpickr": "^4.6.13",
     "jsvectormap": "^1.6.0",
-    "next": "^14.2.4",
-    "react": "^18",
+    "next": "^15.0.0-rc.0",
+    "next-auth": "^4.24.7",
+    "react": "^19.0.0-rc-f65ac7bd-20240826",
     "react-apexcharts": "^1.4.1",
-    "react-dom": "^18"
+    "react-dom": "^19.0.0-rc-f65ac7bd-20240826"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -23,7 +24,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0",
+    "eslint-config-next": "^15.0.0-rc.0",
     "postcss": "^8",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
