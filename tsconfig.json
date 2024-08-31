@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "auth": ["./auth"]
+    },
     "lib": [
       "dom",
       "dom.iterable",
