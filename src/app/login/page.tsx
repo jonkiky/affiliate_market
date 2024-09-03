@@ -1,14 +1,15 @@
 import React from "react";
-import { signIn,auth } from "@/auth"; // Correct import for NextAuth signIn function
+import { signIn,auth } from "@/auth"; 
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { redirect } from 'next/navigation'
 
 async function SignIn(){
    const session = await auth();
-    console.log("ab");
-    console.log(session);
-  if (!session.user) return null;
+   if (session && session.user) {
+      redirect('/')
+    }
 
   return (
     <div className="rounded-sm border-stroke bg-white">
@@ -47,7 +48,7 @@ async function SignIn(){
           <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
             <span className="mb-1.5 block font-medium">Start for free</span>
             <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-              Sign In to TailAdmin
+              Sign In to TailAdmin 
             </h2>
 
             {/* Use a single form element for sign-in */}
@@ -136,7 +137,6 @@ async function SignIn(){
                   </span>
                   Sign in with Google
                 </button>
-               
               </form>
             {/* Additional content or links */}
           </div>
