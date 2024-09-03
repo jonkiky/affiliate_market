@@ -1,11 +1,13 @@
+"use client"
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { signOut } from "next-auth/react"
 import ClickOutside from "@/components/ClickOutside";
-import { auth,signOut } from "@/auth"
 
-  export default async function DropdownUser (){
+  export default  function DropdownUser (user){
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const info = user.user.props.session.user;
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
@@ -15,7 +17,7 @@ import { auth,signOut } from "@/auth"
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree 
+            {info.name}
           </span>
           <span className="block text-xs">UX Designer</span>
         </span>
@@ -129,8 +131,11 @@ import { auth,signOut } from "@/auth"
             </li>
           </ul>
 
-
-          <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+          <button 
+            onClick={() => signOut({
+              callbackUrl: `${window.location.origin}/login`,
+            })}
+            className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
             <svg
               className="fill-current"
               width="22"
