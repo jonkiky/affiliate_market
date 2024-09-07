@@ -11,7 +11,7 @@ export default function DefaultLayout({user,
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (!user) {
+  if (!user || user.props.session == null) {
     redirect("/login")
   }
 

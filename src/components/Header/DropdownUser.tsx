@@ -7,7 +7,8 @@ import ClickOutside from "@/components/ClickOutside";
 
   export default  function DropdownUser (user){
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const info = user.user.props.session.user;
+
+  const info = user?.user?.props?.session?.user || {'name':''};
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
@@ -19,14 +20,14 @@ import ClickOutside from "@/components/ClickOutside";
           <span className="block text-sm font-medium text-black dark:text-white">
             {info.name}
           </span>
-          <span className="block text-xs">UX Designer</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <Image
+          <img
+            className="rounded-full"
             width={112}
             height={112}
-            src={"/images/user/user-01.png"}
+            src={info.image||"/images/user/user-01.png"}
             style={{
               width: "auto",
               height: "auto",

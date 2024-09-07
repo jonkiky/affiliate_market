@@ -14,6 +14,7 @@ async function  Home() {
   if (!user) {
     redirect("/login")
   };
+  console.log(user)
   return (
     <DefaultLayout user = {user}>
       <ECommerce />
