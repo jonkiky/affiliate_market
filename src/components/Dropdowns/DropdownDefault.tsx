@@ -3,10 +3,6 @@ import { signIn,auth } from "@/auth";
 
 const DropdownDefault = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-   const session = await auth();
-
-
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 

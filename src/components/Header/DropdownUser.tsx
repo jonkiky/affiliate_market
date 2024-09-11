@@ -4,11 +4,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react"
 import ClickOutside from "@/components/ClickOutside";
+import { Session } from "next-auth"; 
 
-  export default  function DropdownUser (user){
+// Define the type for the user prop
+interface UserProps {
+  user?: {
+    props: {
+      session: Session | null;
+    };
+  };
+}
+
+  export default  function DropdownUser ({ user }: UserProps){
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const info = user?.user?.props?.session?.user || {'name':''};
+  const info = user?.props?.session?.user || {'name':''};
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
