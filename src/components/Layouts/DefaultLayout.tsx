@@ -3,11 +3,13 @@ import React, { useState, ReactNode } from "react";
 import { redirect } from "next/navigation"
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import { Session } from "next-auth"; 
 
 export default function DefaultLayout({user, 
   children,
 }: {
   children: React.ReactNode;
+  user?: { props: { session: Session | null } };
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
