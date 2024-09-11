@@ -1,11 +1,14 @@
+"use client"
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { signOut } from "next-auth/react"
 import ClickOutside from "@/components/ClickOutside";
 
-const DropdownUser = () => {
+  export default  function DropdownUser (user){
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const info = user?.user?.props?.session?.user || {'name':''};
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
@@ -15,16 +18,16 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {info.name}
           </span>
-          <span className="block text-xs">UX Designer</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
-          <Image
+          <img
+            className="rounded-full"
             width={112}
             height={112}
-            src={"/images/user/user-01.png"}
+            src={info.image||"/images/user/user-01.png"}
             style={{
               width: "auto",
               height: "auto",
@@ -128,7 +131,12 @@ const DropdownUser = () => {
               </Link>
             </li>
           </ul>
-          <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+
+          <button 
+            onClick={() => signOut({
+              callbackUrl: `${window.location.origin}/login`,
+            })}
+            className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
             <svg
               className="fill-current"
               width="22"
@@ -155,4 +163,3 @@ const DropdownUser = () => {
   );
 };
 
-export default DropdownUser;
