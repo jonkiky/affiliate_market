@@ -9,16 +9,17 @@ import { Session } from "next-auth";
 // Define the type for the user prop
 interface UserProps {
   user?: {
-    props: {
-      session: Session | null;
-    };
-  };
+  id: number;
+  name: string;
+  email: string;
+  image: string;
+  emailVerified:string;
+};
 }
 
   export default  function DropdownUser ({ user }: UserProps){
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const info = user?.props?.session?.user || {'name':''};
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative float-right block">
       <Link
@@ -28,7 +29,7 @@ interface UserProps {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Welcome <b>{info.name}</b>
+            Welcome <b>{user?.name || "unknown"}</b>
           </span>
         </span>
 
@@ -37,7 +38,7 @@ interface UserProps {
             className="rounded-full"
             width={112}
             height={112}
-            src={info.image||"/images/user/user-01.png"}
+            src={user?.image||"/images/user/user-01.png"}
             style={{
               width: "auto",
               height: "auto",

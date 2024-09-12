@@ -10,10 +10,12 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
   user: {
-    props: {
-      session: Session | null; // Make sure to adjust based on your actual session structure
-    };
-  };
+  id: number;
+  name: string;
+  email: string;
+  image: string;
+  emailVerified:string;
+};
 }) => {
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
@@ -75,7 +77,7 @@ const Header = (props: {
 
         <div className="w-full block  gap-3 2xsm:gap-7">
           {/* <!-- User Area --> */}
-          <DropdownUser  user={props.user}/>
+          <DropdownUser  user={props.user || null }/>
           {/* <!-- User Area --> */}
         </div>
       </div>
