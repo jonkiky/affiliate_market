@@ -3,16 +3,42 @@ import Image from "next/image";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { auth } from "@/auth"; 
 
-export const metadata: Metadata = {
-  title: "Next.js Profile | TailAdmin - Next.js Dashboard Template",
-  description:
-    "This is Next.js Profile page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
+// Ensure the User type has id: number
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  image: string;
+  emailVerified:string;
 };
 
-const Profile = () => {
+export const metadata: Metadata = {
+  title: "Ecom Partner Program",
+  description: "Earn Passive Income Easily,Hire Us to Manage Your Shop amazon, tiktok, esty and Earn Commissions Effortlessly!",
+};
+
+ 
+async function  Profile() {
+   const session = await auth();
+   if (!session || !session.user) {
+      redirect("/login")
+    }
+
+       // Provide default values to ensure the properties match the User type
+  const user: User = {
+    id: Number(session.user.id) || 0,
+    name: session.user.name || "Unknown Name", // Default value if name is null or undefined
+    email: session.user.email || "unknown@example.com", // Default value if email is null or undefined
+    image: session.user.image || "/images/user/user-01.png", // Default placeholder image if undefined
+    emailVerified:""
+  };
+  
   return (
-    <DefaultLayout>
+    <DefaultLayout user ={user} >
       <div className="mx-auto max-w-242.5">
         <Breadcrumb pageName="Profile" />
 

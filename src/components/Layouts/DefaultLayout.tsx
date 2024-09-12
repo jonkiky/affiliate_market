@@ -3,20 +3,24 @@ import React, { useState, ReactNode } from "react";
 import { redirect } from "next/navigation"
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import { Session } from "next-auth"; 
 
 export default function DefaultLayout({user, 
   children,
 }: {
   children: React.ReactNode;
-  user?: { props: { session: Session | null } };
+  user?: {
+  id: number;
+  name: string;
+  email: string;
+  image: string;
+  emailVerified:string;
+}
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (!user || user.props.session == null) {
-    redirect("/login")
-  }
-
+   if (!user) {
+      redirect("/login")
+    }
   return (
     <>
       {/* <!-- ===== Page Wrapper Start ===== --> */}
