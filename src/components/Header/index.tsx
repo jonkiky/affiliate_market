@@ -5,6 +5,7 @@ import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import { Session } from "next-auth"; 
+import { redirect } from "next/navigation";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -17,6 +18,13 @@ const Header = (props: {
   emailVerified:string;
 };
 }) => {
+
+
+   if (!props.user) {
+      redirect("/login")
+    }
+
+
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
