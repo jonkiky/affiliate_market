@@ -36,6 +36,7 @@ async function  FormLayout() {
     image: session.user.image || "/images/user/user-01.png", // Default placeholder image if undefined
     emailVerified:""
   };
+  
   return (
     <DefaultLayout user ={user} >
       <Breadcrumb pageName="FormLayout" />
